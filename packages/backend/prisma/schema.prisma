@@ -1,0 +1,31 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+enum QuestionCategory {
+  JS
+  HTML_CSS
+  React
+  Node
+}
+
+enum QuestionDifficulty {
+  junior
+  middle
+  senior
+}
+
+model Flashcard {
+  id         Int                 @id @default(autoincrement())
+  question   String
+  answer     String
+  category   QuestionCategory?
+  difficulty QuestionDifficulty?
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+}
