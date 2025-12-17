@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.FlashcardScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.TestOptionScalarFieldEnum = exports.TestScalarFieldEnum = exports.FlashcardScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -60,7 +60,9 @@ exports.DbNull = runtime.DbNull;
 exports.JsonNull = runtime.JsonNull;
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
-    Flashcard: 'Flashcard'
+    Flashcard: 'Flashcard',
+    Test: 'Test',
+    TestOption: 'TestOption'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -76,6 +78,21 @@ exports.FlashcardScalarFieldEnum = {
     difficulty: 'difficulty',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.TestScalarFieldEnum = {
+    id: 'id',
+    question: 'question',
+    description: 'description',
+    category: 'category',
+    difficulty: 'difficulty',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.TestOptionScalarFieldEnum = {
+    id: 'id',
+    text: 'text',
+    isCorrect: 'isCorrect',
+    testId: 'testId'
 };
 exports.SortOrder = {
     asc: 'asc',

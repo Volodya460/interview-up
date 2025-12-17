@@ -11,7 +11,6 @@ const common_1 = require("@nestjs/common");
 let HttpExceptionFilter = class HttpExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
-        const request = ctx.getRequest();
         const response = ctx.getResponse();
         const status = exception.getStatus();
         const exceptionResponse = exception.getResponse();
@@ -21,7 +20,6 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         response.status(status).json({
             ...error,
             timestamp: new Date().toISOString(),
-            path: request.url,
         });
     }
 };

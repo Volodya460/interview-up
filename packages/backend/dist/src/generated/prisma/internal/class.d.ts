@@ -31,5 +31,11 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get flashcard(): Prisma.FlashcardDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    get test(): Prisma.TestDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get testOption(): Prisma.TestOptionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
