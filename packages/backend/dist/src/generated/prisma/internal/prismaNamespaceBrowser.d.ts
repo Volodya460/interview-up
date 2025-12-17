@@ -12,6 +12,8 @@ export declare const JsonNull: import("@prisma/client-runtime-utils").JsonNullCl
 export declare const AnyNull: import("@prisma/client-runtime-utils").AnyNullClass;
 export declare const ModelName: {
     readonly Flashcard: "Flashcard";
+    readonly Test: "Test";
+    readonly TestOption: "TestOption";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -31,6 +33,23 @@ export declare const FlashcardScalarFieldEnum: {
     readonly updatedAt: "updatedAt";
 };
 export type FlashcardScalarFieldEnum = (typeof FlashcardScalarFieldEnum)[keyof typeof FlashcardScalarFieldEnum];
+export declare const TestScalarFieldEnum: {
+    readonly id: "id";
+    readonly question: "question";
+    readonly description: "description";
+    readonly category: "category";
+    readonly difficulty: "difficulty";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+};
+export type TestScalarFieldEnum = (typeof TestScalarFieldEnum)[keyof typeof TestScalarFieldEnum];
+export declare const TestOptionScalarFieldEnum: {
+    readonly id: "id";
+    readonly text: "text";
+    readonly isCorrect: "isCorrect";
+    readonly testId: "testId";
+};
+export type TestOptionScalarFieldEnum = (typeof TestOptionScalarFieldEnum)[keyof typeof TestOptionScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";
