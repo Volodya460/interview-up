@@ -22,3 +22,13 @@ export * from './enums.js';
  * 
  */
 export type Flashcard = Prisma.FlashcardModel
+/**
+ * Model Test
+ * 
+ */
+export type Test = Prisma.TestModel
+/**
+ * Model TestOption
+ * 
+ */
+export type TestOption = Prisma.TestOptionModel

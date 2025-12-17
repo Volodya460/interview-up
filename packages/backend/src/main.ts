@@ -1,9 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/httpExceptionFilter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // убирает лишние поля из body
+      forbidNonWhitelisted: true, // бросает ошибку, если пришли лишние поля
+      transform: true, // преобразует строки в числа и т.п.
+    }),
+  );
   app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(process.env.PORT ?? 3000);
   console.log(`🚀 Backend is running`);

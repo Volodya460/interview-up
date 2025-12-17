@@ -13,7 +13,14 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const flashcards_module_1 = require("./flashcards/flashcards.module");
 const prisma_module_1 = require("./prisma/prisma.module");
+const entity_exists_middleware_1 = require("./common/middleware/entity-exists.middleware");
+const tests_module_1 = require("./tests/tests.module");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(entity_exists_middleware_1.EntityExistsMiddleware)
+            .forRoutes('flashcards/:id', 'tests/:id');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
@@ -22,6 +29,7 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             flashcards_module_1.FlashcardsModule,
             prisma_module_1.PrismaModule,
+            tests_module_1.TestsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
