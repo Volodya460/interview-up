@@ -51,9 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  User: 'User',
   Flashcard: 'Flashcard',
   Test: 'Test',
-  TestOption: 'TestOption'
+  TestOption: 'TestOption',
+  UserTestProgress: 'UserTestProgress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,6 +72,23 @@ export const TransactionIsolationLevel = {
 } as const
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  email: 'email',
+  password: 'password',
+  country: 'country',
+  hashed_rt: 'hashed_rt',
+  verify: 'verify',
+  verificationCode: 'verificationCode',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const FlashcardScalarFieldEnum = {
@@ -106,6 +125,18 @@ export const TestOptionScalarFieldEnum = {
 } as const
 
 export type TestOptionScalarFieldEnum = (typeof TestOptionScalarFieldEnum)[keyof typeof TestOptionScalarFieldEnum]
+
+
+export const UserTestProgressScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  testId: 'testId',
+  selectedOptionId: 'selectedOptionId',
+  isCorrect: 'isCorrect',
+  answeredAt: 'answeredAt'
+} as const
+
+export type UserTestProgressScalarFieldEnum = (typeof UserTestProgressScalarFieldEnum)[keyof typeof UserTestProgressScalarFieldEnum]
 
 
 export const SortOrder = {

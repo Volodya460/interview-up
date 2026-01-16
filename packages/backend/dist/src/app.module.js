@@ -15,6 +15,9 @@ const flashcards_module_1 = require("./flashcards/flashcards.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const entity_exists_middleware_1 = require("./common/middleware/entity-exists.middleware");
 const tests_module_1 = require("./tests/tests.module");
+const auth_module_1 = require("./auth/auth.module");
+const user_module_1 = require("./user/user.module");
+const email_sender_module_1 = require("./email-sender/email-sender.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -30,6 +33,9 @@ exports.AppModule = AppModule = __decorate([
             flashcards_module_1.FlashcardsModule,
             prisma_module_1.PrismaModule,
             tests_module_1.TestsModule,
+            auth_module_1.AuthModule,
+            user_module_1.UserModule,
+            email_sender_module_1.EmailSenderModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

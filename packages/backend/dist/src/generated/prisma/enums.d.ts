@@ -11,3 +11,8 @@ export declare const QuestionDifficulty: {
     readonly senior: "senior";
 };
 export type QuestionDifficulty = (typeof QuestionDifficulty)[keyof typeof QuestionDifficulty];
+export declare const Role: {
+    readonly ADMIN: "ADMIN";
+    readonly USER: "USER";
+};
+export type Role = (typeof Role)[keyof typeof Role];

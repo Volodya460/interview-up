@@ -274,17 +274,11 @@ export type FlashcardMinOrderByAggregateInput = {
 export type FlashcardSumOrderByAggregateInput = {
     id?: Prisma.SortOrder;
 };
-export type StringFieldUpdateOperationsInput = {
-    set?: string;
-};
 export type NullableEnumQuestionCategoryFieldUpdateOperationsInput = {
     set?: $Enums.QuestionCategory | null;
 };
 export type NullableEnumQuestionDifficultyFieldUpdateOperationsInput = {
     set?: $Enums.QuestionDifficulty | null;
-};
-export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string;
 };
 export type IntFieldUpdateOperationsInput = {
     set?: number;

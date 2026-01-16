@@ -19,6 +19,28 @@ enum QuestionDifficulty {
   middle
   senior
 }
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id               String   @id @default(uuid()) @db.Uuid
+  username         String   @unique
+  email            String   @unique
+  password         String
+  country          String
+
+  hashed_rt        String?  @default("")
+  verify           Boolean  @default(false)
+  verificationCode String?  @unique
+
+  role             Role     @default(USER)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  progress         UserTestProgress[]
+}
 
 model Flashcard {
   id         Int                 @id @default(autoincrement())
@@ -37,6 +59,8 @@ model Test {
   category    QuestionCategory?
   difficulty  QuestionDifficulty?
   options     TestOption[]        @relation("TestOptions")
+  progress    UserTestProgress[]
+
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 }
@@ -48,4 +72,23 @@ model TestOption {
 
   test   Test @relation("TestOptions", fields: [testId], references: [id], onDelete: Cascade)
   testId Int
+  progress  UserTestProgress[]
+}
+
+model UserTestProgress {
+  id               Int       @id @default(autoincrement())
+
+  userId           String    @db.Uuid
+  testId           Int
+  selectedOptionId Int
+  isCorrect        Boolean
+  answeredAt       DateTime  @default(now())
+
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  test             Test      @relation(fields: [testId], references: [id], onDelete: Cascade)
+  selectedOption   TestOption @relation(fields: [selectedOptionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, testId])
+  @@index([userId])
+  @@index([testId])
 }

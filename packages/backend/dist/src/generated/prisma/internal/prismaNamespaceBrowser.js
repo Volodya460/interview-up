@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.TestOptionScalarFieldEnum = exports.TestScalarFieldEnum = exports.FlashcardScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.UserTestProgressScalarFieldEnum = exports.TestOptionScalarFieldEnum = exports.TestScalarFieldEnum = exports.FlashcardScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -45,15 +45,30 @@ exports.DbNull = runtime.DbNull;
 exports.JsonNull = runtime.JsonNull;
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
+    User: 'User',
     Flashcard: 'Flashcard',
     Test: 'Test',
-    TestOption: 'TestOption'
+    TestOption: 'TestOption',
+    UserTestProgress: 'UserTestProgress'
 };
 exports.TransactionIsolationLevel = {
     ReadUncommitted: 'ReadUncommitted',
     ReadCommitted: 'ReadCommitted',
     RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
+};
+exports.UserScalarFieldEnum = {
+    id: 'id',
+    username: 'username',
+    email: 'email',
+    password: 'password',
+    country: 'country',
+    hashed_rt: 'hashed_rt',
+    verify: 'verify',
+    verificationCode: 'verificationCode',
+    role: 'role',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 exports.FlashcardScalarFieldEnum = {
     id: 'id',
@@ -78,6 +93,14 @@ exports.TestOptionScalarFieldEnum = {
     text: 'text',
     isCorrect: 'isCorrect',
     testId: 'testId'
+};
+exports.UserTestProgressScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    testId: 'testId',
+    selectedOptionId: 'selectedOptionId',
+    isCorrect: 'isCorrect',
+    answeredAt: 'answeredAt'
 };
 exports.SortOrder = {
     asc: 'asc',
