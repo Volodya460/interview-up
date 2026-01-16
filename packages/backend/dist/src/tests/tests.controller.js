@@ -16,6 +16,9 @@ exports.TestsController = void 0;
 const common_1 = require("@nestjs/common");
 const tests_service_1 = require("./tests.service");
 const create_test_dto_1 = require("./dto/create-test.dto");
+const roles_decorator_1 = require("../common/decorators/roles.decorator");
+const at_guard_1 = require("../auth/guards/at.guard");
+const roles_guard_1 = require("../common/guards/roles.guard");
 let TestsController = class TestsController {
     testsService;
     constructor(testsService) {
@@ -40,6 +43,7 @@ let TestsController = class TestsController {
 exports.TestsController = TestsController;
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)('ADMIN'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_test_dto_1.CreateTestDto]),
@@ -60,6 +64,7 @@ __decorate([
 ], TestsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, roles_decorator_1.Roles)('ADMIN'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -68,6 +73,7 @@ __decorate([
 ], TestsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, roles_decorator_1.Roles)('ADMIN'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -75,6 +81,7 @@ __decorate([
 ], TestsController.prototype, "remove", null);
 exports.TestsController = TestsController = __decorate([
     (0, common_1.Controller)('tests'),
+    (0, common_1.UseGuards)(at_guard_1.AtGuard, roles_guard_1.RolesGuard),
     __metadata("design:paramtypes", [tests_service_1.TestsService])
 ], TestsController);
 //# sourceMappingURL=tests.controller.js.map

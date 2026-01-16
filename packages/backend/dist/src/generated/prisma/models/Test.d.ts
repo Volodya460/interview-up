@@ -134,6 +134,7 @@ export type TestWhereInput = {
     createdAt?: Prisma.DateTimeFilter<"Test"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Test"> | Date | string;
     options?: Prisma.TestOptionListRelationFilter;
+    progress?: Prisma.UserTestProgressListRelationFilter;
 };
 export type TestOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -144,6 +145,7 @@ export type TestOrderByWithRelationInput = {
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
     options?: Prisma.TestOptionOrderByRelationAggregateInput;
+    progress?: Prisma.UserTestProgressOrderByRelationAggregateInput;
 };
 export type TestWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -157,6 +159,7 @@ export type TestWhereUniqueInput = Prisma.AtLeast<{
     createdAt?: Prisma.DateTimeFilter<"Test"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Test"> | Date | string;
     options?: Prisma.TestOptionListRelationFilter;
+    progress?: Prisma.UserTestProgressListRelationFilter;
 }, "id">;
 export type TestOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -192,6 +195,7 @@ export type TestCreateInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     options?: Prisma.TestOptionCreateNestedManyWithoutTestInput;
+    progress?: Prisma.UserTestProgressCreateNestedManyWithoutTestInput;
 };
 export type TestUncheckedCreateInput = {
     id?: number;
@@ -202,6 +206,7 @@ export type TestUncheckedCreateInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     options?: Prisma.TestOptionUncheckedCreateNestedManyWithoutTestInput;
+    progress?: Prisma.UserTestProgressUncheckedCreateNestedManyWithoutTestInput;
 };
 export type TestUpdateInput = {
     question?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -211,6 +216,7 @@ export type TestUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     options?: Prisma.TestOptionUpdateManyWithoutTestNestedInput;
+    progress?: Prisma.UserTestProgressUpdateManyWithoutTestNestedInput;
 };
 export type TestUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -221,6 +227,7 @@ export type TestUncheckedUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     options?: Prisma.TestOptionUncheckedUpdateManyWithoutTestNestedInput;
+    progress?: Prisma.UserTestProgressUncheckedUpdateManyWithoutTestNestedInput;
 };
 export type TestCreateManyInput = {
     id?: number;
@@ -285,9 +292,6 @@ export type TestScalarRelationFilter = {
     is?: Prisma.TestWhereInput;
     isNot?: Prisma.TestWhereInput;
 };
-export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null;
-};
 export type TestCreateNestedOneWithoutOptionsInput = {
     create?: Prisma.XOR<Prisma.TestCreateWithoutOptionsInput, Prisma.TestUncheckedCreateWithoutOptionsInput>;
     connectOrCreate?: Prisma.TestCreateOrConnectWithoutOptionsInput;
@@ -300,6 +304,18 @@ export type TestUpdateOneRequiredWithoutOptionsNestedInput = {
     connect?: Prisma.TestWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.TestUpdateToOneWithWhereWithoutOptionsInput, Prisma.TestUpdateWithoutOptionsInput>, Prisma.TestUncheckedUpdateWithoutOptionsInput>;
 };
+export type TestCreateNestedOneWithoutProgressInput = {
+    create?: Prisma.XOR<Prisma.TestCreateWithoutProgressInput, Prisma.TestUncheckedCreateWithoutProgressInput>;
+    connectOrCreate?: Prisma.TestCreateOrConnectWithoutProgressInput;
+    connect?: Prisma.TestWhereUniqueInput;
+};
+export type TestUpdateOneRequiredWithoutProgressNestedInput = {
+    create?: Prisma.XOR<Prisma.TestCreateWithoutProgressInput, Prisma.TestUncheckedCreateWithoutProgressInput>;
+    connectOrCreate?: Prisma.TestCreateOrConnectWithoutProgressInput;
+    upsert?: Prisma.TestUpsertWithoutProgressInput;
+    connect?: Prisma.TestWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.TestUpdateToOneWithWhereWithoutProgressInput, Prisma.TestUpdateWithoutProgressInput>, Prisma.TestUncheckedUpdateWithoutProgressInput>;
+};
 export type TestCreateWithoutOptionsInput = {
     question: string;
     description?: string | null;
@@ -307,6 +323,7 @@ export type TestCreateWithoutOptionsInput = {
     difficulty?: $Enums.QuestionDifficulty | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    progress?: Prisma.UserTestProgressCreateNestedManyWithoutTestInput;
 };
 export type TestUncheckedCreateWithoutOptionsInput = {
     id?: number;
@@ -316,6 +333,7 @@ export type TestUncheckedCreateWithoutOptionsInput = {
     difficulty?: $Enums.QuestionDifficulty | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    progress?: Prisma.UserTestProgressUncheckedCreateNestedManyWithoutTestInput;
 };
 export type TestCreateOrConnectWithoutOptionsInput = {
     where: Prisma.TestWhereUniqueInput;
@@ -337,6 +355,7 @@ export type TestUpdateWithoutOptionsInput = {
     difficulty?: Prisma.NullableEnumQuestionDifficultyFieldUpdateOperationsInput | $Enums.QuestionDifficulty | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    progress?: Prisma.UserTestProgressUpdateManyWithoutTestNestedInput;
 };
 export type TestUncheckedUpdateWithoutOptionsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -346,18 +365,75 @@ export type TestUncheckedUpdateWithoutOptionsInput = {
     difficulty?: Prisma.NullableEnumQuestionDifficultyFieldUpdateOperationsInput | $Enums.QuestionDifficulty | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    progress?: Prisma.UserTestProgressUncheckedUpdateManyWithoutTestNestedInput;
+};
+export type TestCreateWithoutProgressInput = {
+    question: string;
+    description?: string | null;
+    category?: $Enums.QuestionCategory | null;
+    difficulty?: $Enums.QuestionDifficulty | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    options?: Prisma.TestOptionCreateNestedManyWithoutTestInput;
+};
+export type TestUncheckedCreateWithoutProgressInput = {
+    id?: number;
+    question: string;
+    description?: string | null;
+    category?: $Enums.QuestionCategory | null;
+    difficulty?: $Enums.QuestionDifficulty | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    options?: Prisma.TestOptionUncheckedCreateNestedManyWithoutTestInput;
+};
+export type TestCreateOrConnectWithoutProgressInput = {
+    where: Prisma.TestWhereUniqueInput;
+    create: Prisma.XOR<Prisma.TestCreateWithoutProgressInput, Prisma.TestUncheckedCreateWithoutProgressInput>;
+};
+export type TestUpsertWithoutProgressInput = {
+    update: Prisma.XOR<Prisma.TestUpdateWithoutProgressInput, Prisma.TestUncheckedUpdateWithoutProgressInput>;
+    create: Prisma.XOR<Prisma.TestCreateWithoutProgressInput, Prisma.TestUncheckedCreateWithoutProgressInput>;
+    where?: Prisma.TestWhereInput;
+};
+export type TestUpdateToOneWithWhereWithoutProgressInput = {
+    where?: Prisma.TestWhereInput;
+    data: Prisma.XOR<Prisma.TestUpdateWithoutProgressInput, Prisma.TestUncheckedUpdateWithoutProgressInput>;
+};
+export type TestUpdateWithoutProgressInput = {
+    question?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.NullableEnumQuestionCategoryFieldUpdateOperationsInput | $Enums.QuestionCategory | null;
+    difficulty?: Prisma.NullableEnumQuestionDifficultyFieldUpdateOperationsInput | $Enums.QuestionDifficulty | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    options?: Prisma.TestOptionUpdateManyWithoutTestNestedInput;
+};
+export type TestUncheckedUpdateWithoutProgressInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    question?: Prisma.StringFieldUpdateOperationsInput | string;
+    description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    category?: Prisma.NullableEnumQuestionCategoryFieldUpdateOperationsInput | $Enums.QuestionCategory | null;
+    difficulty?: Prisma.NullableEnumQuestionDifficultyFieldUpdateOperationsInput | $Enums.QuestionDifficulty | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    options?: Prisma.TestOptionUncheckedUpdateManyWithoutTestNestedInput;
 };
 export type TestCountOutputType = {
     options: number;
+    progress: number;
 };
 export type TestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     options?: boolean | TestCountOutputTypeCountOptionsArgs;
+    progress?: boolean | TestCountOutputTypeCountProgressArgs;
 };
 export type TestCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     select?: Prisma.TestCountOutputTypeSelect<ExtArgs> | null;
 };
 export type TestCountOutputTypeCountOptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.TestOptionWhereInput;
+};
+export type TestCountOutputTypeCountProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.UserTestProgressWhereInput;
 };
 export type TestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -368,6 +444,7 @@ export type TestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     createdAt?: boolean;
     updatedAt?: boolean;
     options?: boolean | Prisma.Test$optionsArgs<ExtArgs>;
+    progress?: boolean | Prisma.Test$progressArgs<ExtArgs>;
     _count?: boolean | Prisma.TestCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["test"]>;
 export type TestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -400,6 +477,7 @@ export type TestSelectScalar = {
 export type TestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "description" | "category" | "difficulty" | "createdAt" | "updatedAt", ExtArgs["result"]["test"]>;
 export type TestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     options?: boolean | Prisma.Test$optionsArgs<ExtArgs>;
+    progress?: boolean | Prisma.Test$progressArgs<ExtArgs>;
     _count?: boolean | Prisma.TestCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type TestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -408,6 +486,7 @@ export type $TestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: "Test";
     objects: {
         options: Prisma.$TestOptionPayload<ExtArgs>[];
+        progress: Prisma.$UserTestProgressPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -470,6 +549,7 @@ export interface TestDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
 export interface Prisma__TestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     options<T extends Prisma.Test$optionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Test$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    progress<T extends Prisma.Test$progressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Test$progressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTestProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): runtime.Types.Utils.JsPromise<TResult1 | TResult2>;
     catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): runtime.Types.Utils.JsPromise<T | TResult>;
     finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
@@ -591,6 +671,17 @@ export type Test$optionsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
     take?: number;
     skip?: number;
     distinct?: Prisma.TestOptionScalarFieldEnum | Prisma.TestOptionScalarFieldEnum[];
+};
+export type Test$progressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    select?: Prisma.UserTestProgressSelect<ExtArgs> | null;
+    omit?: Prisma.UserTestProgressOmit<ExtArgs> | null;
+    include?: Prisma.UserTestProgressInclude<ExtArgs> | null;
+    where?: Prisma.UserTestProgressWhereInput;
+    orderBy?: Prisma.UserTestProgressOrderByWithRelationInput | Prisma.UserTestProgressOrderByWithRelationInput[];
+    cursor?: Prisma.UserTestProgressWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.UserTestProgressScalarFieldEnum | Prisma.UserTestProgressScalarFieldEnum[];
 };
 export type TestDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     select?: Prisma.TestSelect<ExtArgs> | null;

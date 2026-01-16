@@ -6,6 +6,9 @@ import { FlashcardsModule } from './flashcards/flashcards.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { EntityExistsMiddleware } from './common/middleware/entity-exists.middleware';
 import { TestsModule } from './tests/tests.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { EmailSenderModule } from './email-sender/email-sender.module';
 
 @Module({
   imports: [
@@ -13,6 +16,9 @@ import { TestsModule } from './tests/tests.module';
     FlashcardsModule,
     PrismaModule,
     TestsModule,
+    AuthModule,
+    UserModule,
+    EmailSenderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

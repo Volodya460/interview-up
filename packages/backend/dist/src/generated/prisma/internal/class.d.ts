@@ -28,6 +28,9 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     $extends: runtime.Types.Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<OmitOpts>, ExtArgs, runtime.Types.Utils.Call<Prisma.TypeMapCb<OmitOpts>, {
         extArgs: ExtArgs;
     }>>;
+    get user(): Prisma.UserDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
     get flashcard(): Prisma.FlashcardDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
@@ -35,6 +38,9 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     get testOption(): Prisma.TestOptionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    get userTestProgress(): Prisma.UserTestProgressDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
 }
