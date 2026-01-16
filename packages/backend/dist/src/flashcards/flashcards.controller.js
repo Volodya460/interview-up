@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const flashcards_service_1 = require("./flashcards.service");
 const flashcards_dto_1 = require("./dto/flashcards.dto");
 const enums_1 = require("../generated/prisma/enums");
+const roles_decorator_1 = require("../common/decorators/roles.decorator");
+const at_guard_1 = require("../auth/guards/at.guard");
+const roles_guard_1 = require("../common/guards/roles.guard");
 let FlashcardsController = class FlashcardsController {
     flashcardsService;
     constructor(flashcardsService) {
@@ -41,6 +44,7 @@ let FlashcardsController = class FlashcardsController {
 exports.FlashcardsController = FlashcardsController;
 __decorate([
     (0, common_1.Post)(),
+    (0, roles_decorator_1.Roles)('ADMIN'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [flashcards_dto_1.CreateFlashcardDto]),
@@ -63,6 +67,7 @@ __decorate([
 ], FlashcardsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, roles_decorator_1.Roles)('ADMIN'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -78,6 +83,7 @@ __decorate([
 ], FlashcardsController.prototype, "remove", null);
 exports.FlashcardsController = FlashcardsController = __decorate([
     (0, common_1.Controller)('flashcards'),
+    (0, common_1.UseGuards)(at_guard_1.AtGuard, roles_guard_1.RolesGuard),
     __metadata("design:paramtypes", [flashcards_service_1.FlashcardsService])
 ], FlashcardsController);
 //# sourceMappingURL=flashcards.controller.js.map
