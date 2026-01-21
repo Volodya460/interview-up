@@ -11,13 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResendVerifyEmailDto = exports.VerifyEmailDto = exports.LoginDto = exports.RegisterDto = void 0;
 const class_validator_1 = require("class-validator");
-const client_1 = require("../../generated/prisma/client");
 class RegisterDto {
     username;
     email;
     password;
     country;
-    role;
 }
 exports.RegisterDto = RegisterDto;
 __decorate([
@@ -40,11 +38,6 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "country", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(client_1.Role),
-    __metadata("design:type", String)
-], RegisterDto.prototype, "role", void 0);
 class LoginDto {
     email;
     password;
@@ -64,6 +57,11 @@ class VerifyEmailDto {
     verificationCode;
 }
 exports.VerifyEmailDto = VerifyEmailDto;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], VerifyEmailDto.prototype, "verificationCode", void 0);
 class ResendVerifyEmailDto {
     email;
 }

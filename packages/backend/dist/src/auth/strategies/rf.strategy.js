@@ -14,24 +14,28 @@ const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const passport_jwt_1 = require("passport-jwt");
 const auth_service_1 = require("../auth.service");
-const secret = process.env.REFRESH_TOKEN_SECRET || 'fallback-refresh-secret';
+function cookieExtractor(req) {
+    if (!req?.cookies)
+        return null;
+    return req.cookies['rt'] || null;
+}
 let RtStrategy = class RtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-refresh') {
     authService;
     constructor(authService) {
+        const secret = process.env.REFRESH_TOKEN_SECRET;
+        if (!secret) {
+            throw new Error('REFRESH_TOKEN_SECRET is not configured');
+        }
         super({
-            jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,
+            jwtFromRequest: cookieExtractor,
             secretOrKey: secret,
+            ignoreExpiration: false,
             passReqToCallback: true,
         });
         this.authService = authService;
     }
     async validate(req, payload) {
-        const authHeader = req.get('authorization');
-        if (!authHeader?.startsWith('Bearer ')) {
-            throw new common_1.UnauthorizedException('Missing refresh token');
-        }
-        const refreshToken = authHeader.slice(7).trim();
+        const refreshToken = req.cookies?.rt;
         if (!refreshToken)
             throw new common_1.UnauthorizedException('Missing refresh token');
         const user = await this.authService.validateRefreshTokenUser(payload.sub, refreshToken);
