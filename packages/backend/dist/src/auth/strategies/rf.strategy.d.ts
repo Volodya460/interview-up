@@ -14,7 +14,7 @@ export declare class RtStrategy extends RtStrategy_base {
         id: string;
         email: string;
         role: string;
-        refreshToken: string;
+        refreshToken: any;
         sub: string;
     }>;
 }

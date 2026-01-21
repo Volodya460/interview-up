@@ -14,6 +14,8 @@ const prisma_module_1 = require("../prisma/prisma.module");
 const email_sender_module_1 = require("../email-sender/email-sender.module");
 const user_module_1 = require("../user/user.module");
 const jwt_1 = require("@nestjs/jwt");
+const at_strategy_1 = require("./strategies/at.strategy");
+const rf_strategy_1 = require("./strategies/rf.strategy");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -25,7 +27,7 @@ exports.AuthModule = AuthModule = __decorate([
             user_module_1.UserModule,
             jwt_1.JwtModule.register({}),
         ],
-        providers: [auth_service_1.AuthService],
+        providers: [auth_service_1.AuthService, at_strategy_1.AtStrategy, rf_strategy_1.RtStrategy],
         controllers: [auth_controller_1.AuthController],
     })
 ], AuthModule);

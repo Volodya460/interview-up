@@ -19,6 +19,7 @@ const auth_dto_1 = require("./dto/auth.dto");
 const rf_guard_1 = require("./guards/rf.guard");
 const getUser_decorator_1 = require("../common/decorators/getUser.decorator");
 const at_guard_1 = require("./guards/at.guard");
+const cookie_options_1 = require("../common/helpers/cookie-options");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -27,20 +28,24 @@ let AuthController = class AuthController {
     signup(dto) {
         return this.authService.register(dto);
     }
-    signin(dto) {
-        return this.authService.login(dto);
+    async signin(dto, res) {
+        const tokens = await this.authService.login(dto);
+        res.cookie('rt', tokens.refresh_token, (0, cookie_options_1.refreshCookieOptions)());
+        return { access_token: tokens.access_token };
     }
     verifyEmail(dto) {
-        console.log(dto);
         return this.authService.verifyEmail(dto.verificationCode);
     }
     resendVerifyCode(dto) {
         return this.authService.resendVerifyCode(dto.email);
     }
-    refreshTokens(user) {
-        return this.authService.refresh(user.sub, user.refreshToken);
+    async refreshTokens(user, res) {
+        const tokens = await this.authService.refresh(user.sub);
+        res.cookie('rt', tokens.refresh_token, (0, cookie_options_1.refreshCookieOptions)());
+        return { access_token: tokens.access_token };
     }
-    logout(user) {
+    logout(user, res) {
+        res.clearCookie('rt', { path: '/auth/refresh' });
         return this.authService.logout(user.sub);
     }
 };
@@ -57,8 +62,9 @@ __decorate([
     (0, common_1.Post)('login'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [auth_dto_1.LoginDto]),
+    __metadata("design:paramtypes", [auth_dto_1.LoginDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signin", null);
 __decorate([
@@ -82,8 +88,9 @@ __decorate([
     (0, common_1.UseGuards)(rf_guard_1.RtGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, getUser_decorator_1.GetUserDecorator)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "refreshTokens", null);
 __decorate([
@@ -91,8 +98,9 @@ __decorate([
     (0, common_1.UseGuards)(at_guard_1.AtGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     __param(0, (0, getUser_decorator_1.GetUserDecorator)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
