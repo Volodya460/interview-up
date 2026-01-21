@@ -27,7 +27,7 @@ export declare class AuthService {
         role: string;
     }>;
     getTokens(userId: string, email: string, role: string): Promise<Token>;
-    refresh(userId: string, rt: string): Promise<Token>;
+    refresh(userId: string): Promise<Token>;
     updateRefreshTokenHash(userId: string, rt: string): Promise<void>;
     private generateVerificationCode;
 }

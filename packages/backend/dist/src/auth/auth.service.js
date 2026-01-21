@@ -63,7 +63,7 @@ let AuthService = class AuthService {
         this.emailService = emailService;
     }
     async register(dt) {
-        const { username, password, email, country, role = 'USER' } = dt;
+        const { username, password, email, country } = dt;
         const byEmail = await this.user.findByEmail(email);
         if (byEmail)
             throw new common_1.ForbiddenException('Email already exists');
@@ -78,7 +78,6 @@ let AuthService = class AuthService {
             password: hashPassword,
             country,
             verificationCode,
-            role,
         });
         if (!newUser) {
             throw new common_1.ForbiddenException('User registration failed');
@@ -169,18 +168,20 @@ let AuthService = class AuthService {
         if (!accessTokenSecret || !refreshTokenSecret) {
             throw new Error('JWT secrets are not configured');
         }
-        const tokens = (await Promise.all([
+        const tokens = await Promise.all([
             this.jwtService.signAsync({ sub: userId, email, role }, { secret: accessTokenSecret, expiresIn: '5m' }),
             this.jwtService.signAsync({ sub: userId, email, role }, { secret: refreshTokenSecret, expiresIn: '7d' }),
-        ]));
+        ]);
         const [at, rt] = tokens;
         return {
             access_token: at,
             refresh_token: rt,
         };
     }
-    async refresh(userId, rt) {
-        const user = await this.validateRefreshTokenUser(userId, rt);
+    async refresh(userId) {
+        const user = await this.user.findById(userId);
+        if (!user)
+            throw new common_1.ForbiddenException('Access denied');
         const tokens = await this.getTokens(user.id, user.email, user.role);
         await this.updateRefreshTokenHash(user.id, tokens.refresh_token);
         return tokens;
